@@ -1,0 +1,45 @@
+//Question-https://leetcode.com/problems/remove-duplicate-letters/description/?envType=daily-question&envId=2023-09-26
+
+TC:O(N) SC:O(N)
+
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> freq(26,0); //vector for registering frequency of characters
+        vector<bool> seen(26,false); // vector for registering presence in monotonic stack
+        stack<char> st; //monotonic stack
+        for(int i = 0;i<s.size();i++)
+        freq[s[i]-'a']++;
+
+        for(int i = 0;i<s.size();i++)
+        { 
+        //here if character already present in monotonic stack
+        if(seen[s[i]-'a'])
+        {
+            freq[s[i]-'a']--;
+            continue;
+        }
+         //if upcoming character is smaller than character at top of stack and character at top of stack is there to come in further string
+            while(!st.empty() && s[i]<st.top()&& freq[st.top()-'a']>0)
+            {
+                seen[st.top()-'a']= false;
+                st.pop();
+            }
+            st.push(s[i]);
+            seen[s[i]-'a']=true;
+            freq[s[i]-'a']--;
+
+
+        }
+        string ans= "";
+        while(!st.empty())
+        {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+
+        return ans;
+
+    }
+};
