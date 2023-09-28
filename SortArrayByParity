@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/sort-array-by-parity/description/?envType=daily-question&envId=2023-09-28
+
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int start = 0;
+        int end = nums.size()-1;
+        int tmp;
+        while(start<end)
+        {
+            if(nums[start]%2!=0)
+            {
+                tmp = nums[end];
+                nums[end] = nums[start];
+                nums[start]= tmp;
+                end--;
+            }
+            else if(nums[end]%2==0)
+            {
+                tmp = nums[end];
+                nums[end] = nums[start];
+                nums[start]= tmp;
+                start++;
+            }
+            else{
+                start++;
+                end--;
+            }
+        }
+        return nums;
+    }
+};
