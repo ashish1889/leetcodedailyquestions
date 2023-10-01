@@ -1,0 +1,30 @@
+// Question-  https://leetcode.com/problems/reverse-words-in-a-string-iii/description/?envType=daily-question&envId=2023-10-01
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        stack<char> st;
+        string res;
+        int len = s.length();
+        for(int i = 0;i<len;i++)
+        {
+         if(s[i]!=' ')
+         st.push(s[i]);
+         else
+         {
+             while(!st.empty()){
+              res+=string(1,st.top());// Here mistake which i did was instead of st.top() put st.pop() causing compilation error
+              st.pop();
+             }
+             
+             res+=string(1,' ');
+         }
+        }
+             while(!st.empty()){
+                 res+=string(1,st.top());
+              st.pop();
+             }
+            // res+=string(1,st.pop());
+             return res;
+    }
+};
