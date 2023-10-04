@@ -11,7 +11,7 @@ public:
             a[nums[i]]+=1;
         }
         for(int i = 0;i<=100;i++)
-        {
+        {   //Condition check used here for formula nC2(number of pairs formed - combinactorics)
             if(a[i]>1)
             {
             res+=(a[i]*(a[i]-1))/2;
