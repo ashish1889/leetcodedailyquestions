@@ -47,3 +47,33 @@ private:
         return last;
     }
 };
+
+//Second way of code using Lower Bound and Upper Bound
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+    int len = nums.size();
+    if(len == 1 && nums[0]==target)
+    return {0,0};
+     //first element which is not less than target= LB
+    int indexfirst = lower_bound(nums.begin(),nums.end(),target)-nums.begin();
+   
+    if(indexfirst>=len||(nums[indexfirst]!=target))
+    return{-1,-1};
+
+    //first element which is greater than target = UB
+    int indexlast = upper_bound(nums.begin(),nums.end(),target)-nums.begin();
+    
+    
+    
+     if(indexlast>=len){
+       //  indexlast = len-1;
+       return {indexfirst,indexlast-1};
+     }
+     
+     return {indexfirst,indexlast-1};
+
+        
+    }
+};
